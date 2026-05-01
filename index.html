@@ -1,9 +1,3 @@
-Use this full updated file. It now includes:
-	•	flip button
-	•	hidden experience descriptions
-	•	show/hide animation
-	•	corrected JavaScript
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -373,9 +367,7 @@ Use this full updated file. It now includes:
       font-size: 11px;
     }
 
-    .exp-highlight {
-      color: var(--accent) !important;
-    }
+    .exp-highlight { color: var(--accent) !important; }
 
     .flip-btn-wrap {
       margin-top: 1.2rem;
@@ -395,9 +387,7 @@ Use this full updated file. It now includes:
       padding: 0;
     }
 
-    .flip-btn.flipped {
-      transform: rotateX(180deg);
-    }
+    .flip-btn.flipped { transform: rotateX(180deg); }
 
     .flip-front,
     .flip-back {
@@ -436,7 +426,7 @@ Use this full updated file. It now includes:
     }
 
     .exp-detail.open {
-      max-height: 500px;
+      max-height: 800px;
       opacity: 1;
       margin-top: 1.2rem;
     }
@@ -640,13 +630,11 @@ Use this full updated file. It now includes:
 
     #contact { background: var(--surface); }
 
-    .contact-inner {
-      max-width: 700px;
-    }
+    .contact-inner { max-width: 920px; }
 
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
       margin-top: 2rem;
     }
@@ -668,6 +656,11 @@ Use this full updated file. It now includes:
       transform: translateY(-4px);
     }
 
+    .contact-item.linkedin:hover {
+      border-color: #0A66C2;
+      box-shadow: 0 0 24px rgba(10,102,194,0.12);
+    }
+
     .contact-item-label {
       font-size: 10px;
       color: var(--muted);
@@ -680,6 +673,10 @@ Use this full updated file. It now includes:
       font-weight: 600;
       font-size: 0.85rem;
       color: var(--accent);
+    }
+
+    .contact-item.linkedin .contact-item-value {
+      color: #42f5c8;
     }
 
     footer {
@@ -767,7 +764,7 @@ Use this full updated file. It now includes:
       </div>
       <div class="stat-card">
         <div class="stat-number">10–30%</div>
-        <div class="stat-label">Sales KPI overachievement — 6 months running</div>
+        <div class="stat-label">Sales KPI overachievement — 6 months</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">25%</div>
@@ -803,17 +800,10 @@ Use this full updated file. It now includes:
           </div>
 
           <div class="exp-detail">
-            <p>
-             At Samsung Electronics, I work closely with customers to understand their device needs and provide suitable product recommendations across smartphones, tablets, smartwatches, and the wider Samsung ecosystem. I focus on delivering personalised solutions by aligning products with each customer’s lifestyle, budget, and usage requirements.
-            </p>
-            <p>
-             I actively demonstrate product features and ecosystem integration, helping customers understand how devices such as smartphones, wearables, and accessories connect seamlessly to improve productivity and everyday convenience. This approach has supported increased customer confidence and higher-value purchases through solution-based selling.
-            </p>
-            <p>
-             In addition to sales, I provide hands-on technical support, including device setup, data transfer, software updates, troubleshooting, and basic diagnostics. I assist customers with warranty processes, service bookings, and escalated concerns, ensuring issues are handled efficiently and professionally.            </p>
-            <p>
-             I maintain a 95%+ concern resolution rate by applying strong problem-solving skills, clear communication, and a customer-first approach. I also handle difficult situations with patience and professionalism, ensuring a positive experience even in high-pressure or complaint scenarios.
-            </p>
+            <p>At Samsung Electronics, I work closely with customers to understand their device needs and provide suitable product recommendations across smartphones, tablets, smartwatches, and the wider Samsung ecosystem. I focus on delivering personalised solutions by aligning products with each customer’s lifestyle, budget, and usage requirements.</p>
+            <p>I actively demonstrate product features and ecosystem integration, helping customers understand how devices such as smartphones, wearables, and accessories connect seamlessly to improve productivity and everyday convenience. This approach has supported increased customer confidence and higher-value purchases through solution-based selling.</p>
+            <p>In addition to sales, I provide hands-on technical support, including device setup, data transfer, software updates, troubleshooting, and basic diagnostics. I assist customers with warranty processes, service bookings, and escalated concerns, ensuring issues are handled efficiently and professionally.</p>
+            <p>I maintain a 95%+ concern resolution rate by applying strong problem-solving skills, clear communication, and a customer-first approach. I also handle difficult situations with patience and professionalism, ensuring a positive experience even in high-pressure or complaint scenarios.</p>
           </div>
         </div>
       </div>
@@ -841,23 +831,11 @@ Use this full updated file. It now includes:
           </div>
 
           <div class="exp-detail">
-            <p>
-              At Harvey Norman Computers, I worked in a fast-paced retail and technical environment, assisting customers in selecting laptops, accessories, warranties, software, and technical services tailored to their personal, study, and business needs. I focused on understanding each customer’s requirements and providing practical, value-based solutions rather than just selling products.
-            </p>
-            <p>
-              I consistently exceeded sales KPIs by 10–30% for six consecutive months by applying strong product knowledge, effective communication, and consultative selling techniques. I also contributed to increased store revenue through upselling and cross-selling complementary products such as accessories, protection plans, and software bundles.
-            </p>
-            <p>
-              In addition to sales, I delivered hands-on technical support, including software recovery, operating system reinstallation, BIOS updates, virus removal, and troubleshooting across Windows, macOS, and Android devices. I handled customer issues efficiently, ensuring minimal downtime and high satisfaction.            
-
-            </p>
-            </p>
-              <p>
-             I built strong customer relationships through clear communication, honest recommendations, and reliable after-sales support, which helped improve repeat business and customer trust. I also assisted with product demonstrations, setup guidance, and educating customers on how to use and maintain their devices effectively.
-
-              <p>
-    Working in a high-pressure retail environment, I developed strong time management, problem-solving, and multitasking skills while maintaining attention to detail and professionalism. I collaborated with team members to meet store targets, support daily operations, and maintain a high standard of customer service.
-              </p>
+            <p>At Harvey Norman Computers, I worked in a fast-paced retail and technical environment, assisting customers in selecting laptops, accessories, warranties, software, and technical services tailored to their personal, study, and business needs. I focused on understanding each customer’s requirements and providing practical, value-based solutions rather than just selling products.</p>
+            <p>I consistently exceeded sales KPIs by 10–30% for six consecutive months by applying strong product knowledge, effective communication, and consultative selling techniques. I also contributed to increased store revenue through upselling and cross-selling complementary products such as accessories, protection plans, and software bundles.</p>
+            <p>In addition to sales, I delivered hands-on technical support, including software recovery, operating system reinstallation, BIOS updates, virus removal, and troubleshooting across Windows, macOS, and Android devices. I handled customer issues efficiently, ensuring minimal downtime and high satisfaction.</p>
+            <p>I built strong customer relationships through clear communication, honest recommendations, and reliable after-sales support, which helped improve repeat business and customer trust. I also assisted with product demonstrations, setup guidance, and educating customers on how to use and maintain their devices effectively.</p>
+            <p>Working in a high-pressure retail environment, I developed strong time management, problem-solving, and multitasking skills while maintaining attention to detail and professionalism. I collaborated with team members to meet store targets, support daily operations, and maintain a high standard of customer service.</p>
           </div>
         </div>
       </div>
@@ -883,12 +861,8 @@ Use this full updated file. It now includes:
           </div>
 
           <div class="exp-detail">
-            <p>
-              At H&amp;M, I worked as a Sales Advisor in a busy retail environment, supporting customers with product selection, styling advice, fitting room support, and general enquiries.
-            </p>
-            <p>
-              This role helped me build strong communication, teamwork, and customer service skills while supporting sales through complementary product recommendations and professional customer support.
-            </p>
+            <p>At H&amp;M, I worked as a Sales Advisor in a busy retail environment, supporting customers with product selection, styling advice, fitting room support, and general enquiries.</p>
+            <p>This role helped me build strong communication, teamwork, and customer service skills while supporting sales through complementary product recommendations and professional customer support.</p>
           </div>
         </div>
       </div>
@@ -926,9 +900,7 @@ Use this full updated file. It now includes:
           <span class="tag teal">Wireshark</span>
           <span class="tag teal">Excel</span>
           <span class="tag teal">Cloud Security</span>
-          <span class="tag teal">Threat & Vulnerability Management</span>
-
-
+          <span class="tag teal">Threat &amp; Vulnerability Management</span>
         </div>
       </div>
     </div>
@@ -1016,6 +988,10 @@ Use this full updated file. It now includes:
         <a class="contact-item" href="tel:0481707205">
           <div class="contact-item-label">Phone</div>
           <div class="contact-item-value">048 170 7205</div>
+        </a>
+        <a class="contact-item linkedin" href="https://www.linkedin.com/in/samrat-chakraborty-166292239/" target="_blank" rel="noopener noreferrer">
+          <div class="contact-item-label">LinkedIn</div>
+          <div class="contact-item-value"> Profile ↗</div>
         </a>
         <div class="contact-item">
           <div class="contact-item-label">Location</div>
