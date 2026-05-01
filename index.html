@@ -1,3 +1,9 @@
+Use this full updated file. It now includes:
+	•	flip button
+	•	hidden experience descriptions
+	•	show/hide animation
+	•	corrected JavaScript
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* NOISE OVERLAY */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +48,6 @@
       opacity: 0.6;
     }
 
-    /* NAVBAR */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -85,7 +89,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -98,7 +101,6 @@
       overflow: hidden;
     }
 
-    /* Radial glow background */
     #hero::after {
       content: '';
       position: absolute;
@@ -227,7 +229,6 @@
 
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* HERO RIGHT — stats */
     .hero-right {
       display: flex;
       flex-direction: column;
@@ -267,8 +268,8 @@
 
     .stat-label { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
 
-    /* SECTION BASE */
     section { padding: 6rem 3rem; }
+
     .section-label {
       display: flex;
       align-items: center;
@@ -279,6 +280,7 @@
       color: var(--accent);
       margin-bottom: 1rem;
     }
+
     .section-label::after {
       content: '';
       flex: 1;
@@ -294,7 +296,6 @@
       margin-bottom: 3rem;
     }
 
-    /* EXPERIENCE */
     #experience { background: var(--surface); }
 
     .exp-grid {
@@ -376,7 +377,77 @@
       color: var(--accent) !important;
     }
 
-    /* SKILLS */
+    .flip-btn-wrap {
+      margin-top: 1.2rem;
+      perspective: 800px;
+      display: inline-block;
+    }
+
+    .flip-btn {
+      position: relative;
+      width: 160px;
+      height: 36px;
+      transform-style: preserve-3d;
+      transition: transform 0.55s ease;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    .flip-btn.flipped {
+      transform: rotateX(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--tag-border);
+    }
+
+    .flip-front {
+      background: var(--tag-bg);
+      color: var(--accent);
+    }
+
+    .flip-back {
+      background: var(--accent);
+      color: #0a0a0f;
+      transform: rotateX(180deg);
+    }
+
+    .exp-detail {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+    }
+
+    .exp-detail.open {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 1.2rem;
+    }
+
+    .exp-detail p {
+      color: #8888a0;
+      font-size: 12.5px;
+      line-height: 1.8;
+      margin-bottom: 0.8rem;
+    }
+
     #skills { background: var(--bg); }
 
     .skills-container {
@@ -432,7 +503,6 @@
 
     .tag.teal:hover { background: rgba(66,245,200,0.15); }
 
-    /* PROJECTS */
     #projects { background: var(--surface); }
 
     .projects-grid {
@@ -511,7 +581,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* EDUCATION */
     #education { background: var(--bg); }
 
     .edu-card {
@@ -569,7 +638,6 @@
       text-transform: uppercase;
     }
 
-    /* CONTACT */
     #contact { background: var(--surface); }
 
     .contact-inner {
@@ -614,7 +682,6 @@
       color: var(--accent);
     }
 
-    /* FOOTER */
     footer {
       padding: 2rem 3rem;
       border-top: 1px solid var(--border);
@@ -626,7 +693,6 @@
     footer p { color: var(--muted); font-size: 11px; letter-spacing: 0.08em; }
     footer span { color: var(--accent); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
@@ -643,12 +709,10 @@
       transform: translateY(0);
     }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -666,7 +730,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav>
     <a class="nav-logo" href="#hero">SC<span>.</span></a>
     <ul class="nav-links">
@@ -678,7 +741,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-left">
       <div class="hero-eyebrow">Available for Opportunities</div>
@@ -714,7 +776,6 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-label">02 — Work History</div>
     <h2 class="section-title">Experience</h2>
@@ -733,6 +794,27 @@
             <li><span class="exp-highlight">Resolved 95%+ escalated customer concerns</span>, working directly with Samsung's technical support teams</li>
             <li><span class="exp-highlight">Drove a 30% increase in device upgrades</span> by identifying customer needs and recommending tailored solutions</li>
           </ul>
+
+          <div class="flip-btn-wrap">
+            <button class="flip-btn" onclick="toggleFlip(this)" type="button">
+              <span class="flip-front">↓ More Details</span>
+              <span class="flip-back">↑ Show Less</span>
+            </button>
+          </div>
+
+          <div class="exp-detail">
+            <p>
+             At Samsung Electronics, I work closely with customers to understand their device needs and provide suitable product recommendations across smartphones, tablets, smartwatches, and the wider Samsung ecosystem. I focus on delivering personalised solutions by aligning products with each customer’s lifestyle, budget, and usage requirements.
+            </p>
+            <p>
+             I actively demonstrate product features and ecosystem integration, helping customers understand how devices such as smartphones, wearables, and accessories connect seamlessly to improve productivity and everyday convenience. This approach has supported increased customer confidence and higher-value purchases through solution-based selling.
+            </p>
+            <p>
+             In addition to sales, I provide hands-on technical support, including device setup, data transfer, software updates, troubleshooting, and basic diagnostics. I assist customers with warranty processes, service bookings, and escalated concerns, ensuring issues are handled efficiently and professionally.            </p>
+            <p>
+             I maintain a 95%+ concern resolution rate by applying strong problem-solving skills, clear communication, and a customer-first approach. I also handle difficult situations with patience and professionalism, ensuring a positive experience even in high-pressure or complaint scenarios.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -750,6 +832,33 @@
             <li>Executed complex software recovery, OS reinstallation, BIOS updates across Windows, macOS, and Android</li>
             <li>Generated 15% increase in brand awareness through positive product impressions</li>
           </ul>
+
+          <div class="flip-btn-wrap">
+            <button class="flip-btn" onclick="toggleFlip(this)" type="button">
+              <span class="flip-front">↓ More Details</span>
+              <span class="flip-back">↑ Show Less</span>
+            </button>
+          </div>
+
+          <div class="exp-detail">
+            <p>
+              At Harvey Norman Computers, I worked in a fast-paced retail and technical environment, assisting customers in selecting laptops, accessories, warranties, software, and technical services tailored to their personal, study, and business needs. I focused on understanding each customer’s requirements and providing practical, value-based solutions rather than just selling products.
+            </p>
+            <p>
+              I consistently exceeded sales KPIs by 10–30% for six consecutive months by applying strong product knowledge, effective communication, and consultative selling techniques. I also contributed to increased store revenue through upselling and cross-selling complementary products such as accessories, protection plans, and software bundles.
+            </p>
+            <p>
+              In addition to sales, I delivered hands-on technical support, including software recovery, operating system reinstallation, BIOS updates, virus removal, and troubleshooting across Windows, macOS, and Android devices. I handled customer issues efficiently, ensuring minimal downtime and high satisfaction.            
+
+            </p>
+            </p>
+              <p>
+             I built strong customer relationships through clear communication, honest recommendations, and reliable after-sales support, which helped improve repeat business and customer trust. I also assisted with product demonstrations, setup guidance, and educating customers on how to use and maintain their devices effectively.
+
+              <p>
+    Working in a high-pressure retail environment, I developed strong time management, problem-solving, and multitasking skills while maintaining attention to detail and professionalism. I collaborated with team members to meet store targets, support daily operations, and maintain a high standard of customer service.
+              </p>
+          </div>
         </div>
       </div>
 
@@ -765,13 +874,28 @@
             <li>Resolved product and service concerns to support customer retention and sales</li>
             <li>Managed inventory levels based on demand forecasting to meet sales goals</li>
           </ul>
+
+          <div class="flip-btn-wrap">
+            <button class="flip-btn" onclick="toggleFlip(this)" type="button">
+              <span class="flip-front">↓ More Details</span>
+              <span class="flip-back">↑ Show Less</span>
+            </button>
+          </div>
+
+          <div class="exp-detail">
+            <p>
+              At H&amp;M, I worked as a Sales Advisor in a busy retail environment, supporting customers with product selection, styling advice, fitting room support, and general enquiries.
+            </p>
+            <p>
+              This role helped me build strong communication, teamwork, and customer service skills while supporting sales through complementary product recommendations and professional customer support.
+            </p>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="section-label">03 — Competencies</div>
     <h2 class="section-title">Skills</h2>
@@ -799,12 +923,15 @@
           <span class="tag teal">Tableau</span>
           <span class="tag teal">Microsoft Suite</span>
           <span class="tag teal">Networking Fundamentals</span>
+          <span class="tag teal">Wireshark</span>
+          <span class="tag teal">Excel</span>
+
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
     <div class="section-label">04 — Featured Work</div>
     <h2 class="section-title">Projects</h2>
@@ -854,7 +981,6 @@
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section id="education">
     <div class="section-label">05 — Academic Background</div>
     <h2 class="section-title">Education</h2>
@@ -873,7 +999,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="section-label">06 — Get in Touch</div>
     <h2 class="section-title">Contact</h2>
@@ -898,14 +1023,12 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>© <span id="footer-year"></span> Samrat Chakraborty<span>.</span></p>
     <p>Built with <span>HTML · CSS · JS</span></p>
   </footer>
 
   <script>
-    // Intersection Observer for reveal animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -917,10 +1040,17 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Auto-update footer year
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Active nav link on scroll
+    function toggleFlip(btn) {
+      btn.classList.toggle('flipped');
+
+      const expItem = btn.closest('.exp-item');
+      const detail = expItem.querySelector('.exp-detail');
+
+      detail.classList.toggle('open');
+    }
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -936,4 +1066,3 @@
   </script>
 </body>
 </html>
-
