@@ -32,6 +32,7 @@
       overflow-x: hidden;
     }
 
+    /* Noise overlay */
     body::before {
       content: '';
       position: fixed;
@@ -40,6 +41,16 @@
       pointer-events: none;
       z-index: 9999;
       opacity: 0.6;
+    }
+
+    /* ─── ANIMATED BACKGROUND CANVAS ─── */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
     nav {
@@ -83,6 +94,7 @@
 
     .nav-links a:hover { color: var(--accent); }
 
+    /* ─── HERO ─── */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -95,29 +107,8 @@
       overflow: hidden;
     }
 
-    #hero::after {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(66,245,200,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    #hero::before {
-      content: '';
-      position: absolute;
-      bottom: 10%;
-      left: -5%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(232,245,66,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
     .hero-left { z-index: 1; }
+    .hero-right { z-index: 1; }
 
     .hero-eyebrow {
       display: inline-flex;
@@ -137,6 +128,21 @@
       width: 28px;
       height: 1px;
       background: var(--accent2);
+    }
+
+    /* Blinking dot next to availability */
+    .hero-eyebrow .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      display: inline-block;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
     }
 
     .hero-name {
@@ -227,13 +233,13 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      z-index: 1;
       opacity: 0;
       animation: fadeUp 0.8s 0.5s forwards;
     }
 
     .stat-card {
-      background: var(--card);
+      background: rgba(22,22,31,0.75);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       padding: 1.5rem 2rem;
       position: relative;
@@ -262,6 +268,7 @@
 
     .stat-label { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
 
+    /* ─── SECTIONS ─── */
     section { padding: 6rem 3rem; }
 
     .section-label {
@@ -290,12 +297,10 @@
       margin-bottom: 3rem;
     }
 
+    /* ─── EXPERIENCE ─── */
     #experience { background: var(--surface); }
 
-    .exp-grid {
-      display: grid;
-      gap: 1.5px;
-    }
+    .exp-grid { display: grid; gap: 1.5px; }
 
     .exp-item {
       background: var(--card);
@@ -406,11 +411,7 @@
       border: 1px solid var(--tag-border);
     }
 
-    .flip-front {
-      background: var(--tag-bg);
-      color: var(--accent);
-    }
-
+    .flip-front { background: var(--tag-bg); color: var(--accent); }
     .flip-back {
       background: var(--accent);
       color: #0a0a0f;
@@ -425,11 +426,7 @@
       transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
     }
 
-    .exp-detail.open {
-      max-height: 800px;
-      opacity: 1;
-      margin-top: 1.2rem;
-    }
+    .exp-detail.open { max-height: 800px; opacity: 1; margin-top: 1.2rem; }
 
     .exp-detail p {
       color: #8888a0;
@@ -438,6 +435,7 @@
       margin-bottom: 0.8rem;
     }
 
+    /* ─── SKILLS ─── */
     #skills { background: var(--bg); }
 
     .skills-container {
@@ -464,11 +462,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
     .tag {
       background: var(--tag-bg);
@@ -480,10 +474,7 @@
       transition: background 0.2s, transform 0.2s;
     }
 
-    .tag:hover {
-      background: rgba(232,245,66,0.15);
-      transform: translateY(-2px);
-    }
+    .tag:hover { background: rgba(232,245,66,0.15); transform: translateY(-2px); }
 
     .tag.teal {
       background: rgba(66,245,200,0.08);
@@ -493,6 +484,7 @@
 
     .tag.teal:hover { background: rgba(66,245,200,0.15); }
 
+    /* ─── PROJECTS ─── */
     #projects { background: var(--surface); }
 
     .projects-grid {
@@ -510,10 +502,7 @@
       transition: border-color 0.3s, transform 0.3s;
     }
 
-    .project-card:hover {
-      border-color: rgba(66,245,200,0.3);
-      transform: translateY(-6px);
-    }
+    .project-card:hover { border-color: rgba(66,245,200,0.3); transform: translateY(-6px); }
 
     .project-number {
       font-family: 'Syne', sans-serif;
@@ -543,11 +532,7 @@
       line-height: 1.3;
     }
 
-    .project-org {
-      color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 1.2rem;
-    }
+    .project-org { color: var(--muted); font-size: 11px; margin-bottom: 1.2rem; }
 
     .project-desc {
       color: #7a7a8a;
@@ -556,11 +541,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     .tech-pill {
       background: rgba(255,255,255,0.05);
@@ -571,6 +552,7 @@
       letter-spacing: 0.05em;
     }
 
+    /* ─── EDUCATION ─── */
     #education { background: var(--bg); }
 
     .edu-card {
@@ -600,18 +582,9 @@
       margin-bottom: 0.5rem;
     }
 
-    .edu-degree {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
+    .edu-degree { color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-    .edu-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.5rem;
-    }
+    .edu-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
 
     .edu-year {
       font-family: 'Syne', sans-serif;
@@ -621,13 +594,9 @@
       letter-spacing: 0.05em;
     }
 
-    .edu-location {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    .edu-location { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
 
+    /* ─── CONTACT ─── */
     #contact { background: var(--surface); }
 
     .contact-inner { max-width: 920px; }
@@ -651,22 +620,14 @@
       gap: 0.5rem;
     }
 
-    .contact-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-    }
+    .contact-item:hover { border-color: var(--accent); transform: translateY(-4px); }
 
     .contact-item.linkedin:hover {
       border-color: #0A66C2;
       box-shadow: 0 0 24px rgba(10,102,194,0.12);
     }
 
-    .contact-item-label {
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+    .contact-item-label { font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
 
     .contact-item-value {
       font-family: 'Syne', sans-serif;
@@ -675,9 +636,7 @@
       color: var(--accent);
     }
 
-    .contact-item.linkedin .contact-item-value {
-      color: #42f5c8;
-    }
+    .contact-item.linkedin .contact-item-value { color: #42f5c8; }
 
     footer {
       padding: 2rem 3rem;
@@ -701,14 +660,57 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* GLITCH SECTION TRANSITION */
+    .glitch-section { position: relative; animation: sectionGlitch 0.55s ease; }
+
+    .glitch-section::before,
+    .glitch-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      mix-blend-mode: screen;
+      opacity: 0;
+    }
+
+    .glitch-section::before {
+      background: linear-gradient(90deg, transparent, rgba(66,245,200,0.22), transparent);
+      animation: glitchScan 0.55s ease;
+    }
+
+    .glitch-section::after {
+      background: linear-gradient(90deg, transparent, rgba(232,245,66,0.18), transparent);
+      animation: glitchScanReverse 0.55s ease;
+    }
+
+    @keyframes sectionGlitch {
+      0% { transform: translate(0); filter: none; }
+      12% { transform: translate(-5px, 2px); filter: hue-rotate(35deg) contrast(1.25); }
+      24% { transform: translate(5px, -2px); filter: hue-rotate(-35deg) saturate(1.5); }
+      36% { transform: translate(-3px, 1px); filter: contrast(1.4); }
+      52% { transform: translate(3px, -1px); filter: saturate(1.6); }
+      72% { transform: translate(-1px, 0); filter: hue-rotate(15deg); }
+      100% { transform: translate(0); filter: none; }
+    }
+
+    @keyframes glitchScan {
+      0% { opacity: 0; transform: translateX(-100%); }
+      20% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(100%); }
+    }
+
+    @keyframes glitchScanReverse {
+      0% { opacity: 0; transform: translateX(100%); }
+      20% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateX(-100%); }
+    }
 
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
@@ -738,9 +740,13 @@
     </ul>
   </nav>
 
+  <!-- ─── HERO ─── -->
   <section id="hero">
+    <!-- Animated canvas background -->
+    <canvas id="hero-canvas"></canvas>
+
     <div class="hero-left">
-      <div class="hero-eyebrow">Available for Opportunities</div>
+      <div class="hero-eyebrow"><span class="status-dot"></span>Available for Opportunities</div>
       <h1 class="hero-name">Samrat<br><span class="highlight">Chakraborty</span></h1>
       <p class="hero-subtitle">Sales · Cybersecurity · Analytics</p>
       <p class="hero-desc">
@@ -773,6 +779,7 @@
     </div>
   </section>
 
+  <!-- ─── EXPERIENCE ─── -->
   <section id="experience">
     <div class="section-label">02 — Work History</div>
     <h2 class="section-title">Experience</h2>
@@ -791,16 +798,14 @@
             <li><span class="exp-highlight">Resolved 95%+ escalated customer concerns</span>, working directly with Samsung's technical support teams</li>
             <li><span class="exp-highlight">Drove a 30% increase in device upgrades</span> by identifying customer needs and recommending tailored solutions</li>
           </ul>
-
           <div class="flip-btn-wrap">
             <button class="flip-btn" onclick="toggleFlip(this)" type="button">
               <span class="flip-front">↓ More Details</span>
               <span class="flip-back">↑ Show Less</span>
             </button>
           </div>
-
           <div class="exp-detail">
-            <p>At Samsung Electronics, I work closely with customers to understand their device needs and provide suitable product recommendations across smartphones, tablets, smartwatches, and the wider Samsung ecosystem. I focus on delivering personalised solutions by aligning products with each customer’s lifestyle, budget, and usage requirements.</p>
+            <p>At Samsung Electronics, I work closely with customers to understand their device needs and provide suitable product recommendations across smartphones, tablets, smartwatches, and the wider Samsung ecosystem. I focus on delivering personalised solutions by aligning products with each customer's lifestyle, budget, and usage requirements.</p>
             <p>I actively demonstrate product features and ecosystem integration, helping customers understand how devices such as smartphones, wearables, and accessories connect seamlessly to improve productivity and everyday convenience. This approach has supported increased customer confidence and higher-value purchases through solution-based selling.</p>
             <p>In addition to sales, I provide hands-on technical support, including device setup, data transfer, software updates, troubleshooting, and basic diagnostics. I assist customers with warranty processes, service bookings, and escalated concerns, ensuring issues are handled efficiently and professionally.</p>
             <p>I maintain a 95%+ concern resolution rate by applying strong problem-solving skills, clear communication, and a customer-first approach. I also handle difficult situations with patience and professionalism, ensuring a positive experience even in high-pressure or complaint scenarios.</p>
@@ -822,16 +827,14 @@
             <li>Executed complex software recovery, OS reinstallation, BIOS updates across Windows, macOS, and Android</li>
             <li>Generated 15% increase in brand awareness through positive product impressions</li>
           </ul>
-
           <div class="flip-btn-wrap">
             <button class="flip-btn" onclick="toggleFlip(this)" type="button">
               <span class="flip-front">↓ More Details</span>
               <span class="flip-back">↑ Show Less</span>
             </button>
           </div>
-
           <div class="exp-detail">
-            <p>At Harvey Norman Computers, I worked in a fast-paced retail and technical environment, assisting customers in selecting laptops, accessories, warranties, software, and technical services tailored to their personal, study, and business needs. I focused on understanding each customer’s requirements and providing practical, value-based solutions rather than just selling products.</p>
+            <p>At Harvey Norman Computers, I worked in a fast-paced retail and technical environment, assisting customers in selecting laptops, accessories, warranties, software, and technical services tailored to their personal, study, and business needs. I focused on understanding each customer's requirements and providing practical, value-based solutions rather than just selling products.</p>
             <p>I consistently exceeded sales KPIs by 10–30% for six consecutive months by applying strong product knowledge, effective communication, and consultative selling techniques. I also contributed to increased store revenue through upselling and cross-selling complementary products such as accessories, protection plans, and software bundles.</p>
             <p>In addition to sales, I delivered hands-on technical support, including software recovery, operating system reinstallation, BIOS updates, virus removal, and troubleshooting across Windows, macOS, and Android devices. I handled customer issues efficiently, ensuring minimal downtime and high satisfaction.</p>
             <p>I built strong customer relationships through clear communication, honest recommendations, and reliable after-sales support, which helped improve repeat business and customer trust. I also assisted with product demonstrations, setup guidance, and educating customers on how to use and maintain their devices effectively.</p>
@@ -852,14 +855,12 @@
             <li>Resolved product and service concerns to support customer retention and sales</li>
             <li>Managed inventory levels based on demand forecasting to meet sales goals</li>
           </ul>
-
           <div class="flip-btn-wrap">
             <button class="flip-btn" onclick="toggleFlip(this)" type="button">
               <span class="flip-front">↓ More Details</span>
               <span class="flip-back">↑ Show Less</span>
             </button>
           </div>
-
           <div class="exp-detail">
             <p>At H&amp;M, I worked as a Sales Advisor in a busy retail environment, supporting customers with product selection, styling advice, fitting room support, and general enquiries.</p>
             <p>This role helped me build strong communication, teamwork, and customer service skills while supporting sales through complementary product recommendations and professional customer support.</p>
@@ -870,6 +871,7 @@
     </div>
   </section>
 
+  <!-- ─── SKILLS ─── -->
   <section id="skills">
     <div class="section-label">03 — Competencies</div>
     <h2 class="section-title">Skills</h2>
@@ -906,6 +908,7 @@
     </div>
   </section>
 
+  <!-- ─── PROJECTS ─── -->
   <section id="projects">
     <div class="section-label">04 — Featured Work</div>
     <h2 class="section-title">Projects</h2>
@@ -955,6 +958,7 @@
     </div>
   </section>
 
+  <!-- ─── EDUCATION ─── -->
   <section id="education">
     <div class="section-label">05 — Academic Background</div>
     <h2 class="section-title">Education</h2>
@@ -973,6 +977,7 @@
     </div>
   </section>
 
+  <!-- ─── CONTACT ─── -->
   <section id="contact">
     <div class="section-label">06 — Get in Touch</div>
     <h2 class="section-title">Contact</h2>
@@ -1007,6 +1012,208 @@
   </footer>
 
   <script>
+    // ─────────────────────────────────────────
+    //  HERO ANIMATED BACKGROUND
+    // ─────────────────────────────────────────
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      const heroSection = document.getElementById('hero');
+      const ACCENT = '#e8f542';
+      const TEAL = '#42f5c8';
+      const NODE_COUNT = 90;
+      let nodes = [];
+      let mouse = { x: -9999, y: -9999 };
+      let glitchLines = [];
+      let glitchCooldown = 0;
+      let scanY = 0;
+      let scanDir = 1;
+      let W, H;
+
+      function resize() {
+        W = canvas.width = heroSection.offsetWidth;
+        H = canvas.height = heroSection.offsetHeight;
+      }
+
+      function initNodes() {
+        nodes = Array.from({ length: NODE_COUNT }, () => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 1.8 + 0.8,
+          pulse: Math.random() * Math.PI * 2,
+          color: Math.random() > 0.65 ? ACCENT : TEAL,
+        }));
+      }
+
+      function triggerGlitch() {
+        for (let i = 0; i < 7; i++) {
+          glitchLines.push({
+            y: Math.random() * H,
+            h: Math.random() * 3 + 1,
+            alpha: Math.random() * 0.12 + 0.04,
+            life: 25 + Math.random() * 20,
+            color: Math.random() > 0.5 ? ACCENT : TEAL,
+            xShift: (Math.random() - 0.5) * 30
+          });
+        }
+      }
+
+      function drawHexGrid() {
+        const gSize = 55;
+        ctx.strokeStyle = 'rgba(255,255,255,0.022)';
+        ctx.lineWidth = 0.5;
+        for (let row = -1; row < H / (gSize * 0.866) + 2; row++) {
+          for (let col = -1; col < W / (gSize * 1.5) + 2; col++) {
+            const cx = col * gSize * 1.5 + (row % 2) * gSize * 0.75;
+            const cy = row * gSize * 0.866;
+            ctx.beginPath();
+            for (let a = 0; a < 6; a++) {
+              const ang = (Math.PI / 3) * a - Math.PI / 6;
+              const px = cx + gSize * 0.48 * Math.cos(ang);
+              const py = cy + gSize * 0.48 * Math.sin(ang);
+              a === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.stroke();
+          }
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Ambient glows
+        const g1 = ctx.createRadialGradient(W * 0.75, H * 0.25, 0, W * 0.75, H * 0.25, W * 0.55);
+        g1.addColorStop(0, 'rgba(66,245,200,0.055)');
+        g1.addColorStop(1, 'rgba(10,10,15,0)');
+        ctx.fillStyle = g1;
+        ctx.fillRect(0, 0, W, H);
+
+        const g2 = ctx.createRadialGradient(W * 0.15, H * 0.8, 0, W * 0.15, H * 0.8, W * 0.5);
+        g2.addColorStop(0, 'rgba(232,245,66,0.04)');
+        g2.addColorStop(1, 'rgba(10,10,15,0)');
+        ctx.fillStyle = g2;
+        ctx.fillRect(0, 0, W, H);
+
+        drawHexGrid();
+
+        // Connections
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              const alpha = (1 - dist / 120) * 0.16;
+              const mdx = mouse.x - (nodes[i].x + nodes[j].x) / 2;
+              const mdy = mouse.y - (nodes[i].y + nodes[j].y) / 2;
+              const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+              const boost = Math.max(0, 1 - mdist / 180) * 0.45;
+              const isYellow = nodes[i].color === ACCENT || nodes[j].color === ACCENT;
+              ctx.strokeStyle = isYellow
+                ? `rgba(232,245,66,${alpha + boost})`
+                : `rgba(66,245,200,${alpha + boost})`;
+              ctx.lineWidth = 0.5 + boost * 0.8;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Nodes
+        nodes.forEach(n => {
+          n.pulse += 0.025;
+          const pScale = 1 + Math.sin(n.pulse) * 0.28;
+          const mdx = mouse.x - n.x;
+          const mdy = mouse.y - n.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          const mg = Math.max(0, 1 - mdist / 110);
+
+          const col = n.color === ACCENT ? '232,245,66' : '66,245,200';
+          const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, (n.r * 4 + mg * 9) * pScale);
+          glow.addColorStop(0, `rgba(${col},${0.28 + mg * 0.5})`);
+          glow.addColorStop(1, `rgba(${col},0)`);
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, (n.r * 5 + mg * 10) * pScale, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = n.color;
+          ctx.globalAlpha = 0.88 + mg * 0.12;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r * pScale, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+
+        // Scan line
+        ctx.strokeStyle = 'rgba(66,245,200,0.035)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(0, scanY);
+        ctx.lineTo(W, scanY);
+        ctx.stroke();
+        scanY += scanDir * 0.5;
+        if (scanY > H || scanY < 0) scanDir *= -1;
+
+        // Random glitch trigger
+        if (glitchCooldown <= 0 && Math.random() < 0.004) {
+          triggerGlitch();
+          glitchCooldown = 150;
+        }
+        glitchCooldown--;
+
+        glitchLines = glitchLines.filter(g => g.life > 0);
+        glitchLines.forEach(g => {
+          ctx.fillStyle = g.color;
+          ctx.globalAlpha = g.alpha * (g.life / 45);
+          ctx.fillRect(g.xShift, g.y, W, g.h);
+          ctx.globalAlpha = 1;
+          g.life--;
+        });
+
+        // Corner brackets HUD
+        const bS = 18, bP = 18;
+        ctx.strokeStyle = 'rgba(232,245,66,0.18)';
+        ctx.lineWidth = 1.5;
+        [[bP, bP, 1, 1], [W - bP, bP, -1, 1], [bP, H - bP, 1, -1], [W - bP, H - bP, -1, -1]].forEach(([x, y, sx, sy]) => {
+          ctx.beginPath();
+          ctx.moveTo(x, y + sy * bS);
+          ctx.lineTo(x, y);
+          ctx.lineTo(x + sx * bS, y);
+          ctx.stroke();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      // Mouse tracking relative to hero section
+      heroSection.addEventListener('mousemove', e => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      heroSection.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      window.addEventListener('resize', () => { resize(); initNodes(); });
+      resize();
+      initNodes();
+      draw();
+    })();
+
+
+    // ─────────────────────────────────────────
+    //  SCROLL REVEAL
+    // ─────────────────────────────────────────
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -1018,25 +1225,41 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // Footer year
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+    // Flip buttons
     function toggleFlip(btn) {
       btn.classList.toggle('flipped');
-
-      const expItem = btn.closest('.exp-item');
-      const detail = expItem.querySelector('.exp-detail');
-
-      detail.classList.toggle('open');
+      btn.closest('.exp-item').querySelector('.exp-detail').classList.toggle('open');
     }
 
+    // Glitch section on nav click
+    function triggerSectionGlitch(section) {
+      section.classList.remove('glitch-section');
+      void section.offsetWidth;
+      section.classList.add('glitch-section');
+      setTimeout(() => section.classList.remove('glitch-section'), 650);
+    }
+
+    document.querySelectorAll('.nav-links a, .btn-primary, .btn-secondary').forEach(link => {
+      link.addEventListener('click', (event) => {
+        const targetId = link.getAttribute('href');
+        if (!targetId || !targetId.startsWith('#')) return;
+        const targetSection = document.querySelector(targetId);
+        if (!targetSection) return;
+        event.preventDefault();
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => triggerSectionGlitch(targetSection), 450);
+      });
+    });
+
+    // Active nav highlight
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
-
     window.addEventListener('scroll', () => {
       let current = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
-      });
+      sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
       navLinks.forEach(a => {
         a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
       });
