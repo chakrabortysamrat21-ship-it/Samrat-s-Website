@@ -32,7 +32,6 @@
       overflow-x: hidden;
     }
 
-    /* Noise overlay */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +42,6 @@
       opacity: 0.6;
     }
 
-    /* ─── ANIMATED BACKGROUND CANVAS ─── */
     #hero-canvas {
       position: absolute;
       inset: 0;
@@ -94,7 +92,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* ─── HERO ─── */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -130,7 +127,6 @@
       background: var(--accent2);
     }
 
-    /* Blinking dot next to availability */
     .hero-eyebrow .status-dot {
       width: 7px;
       height: 7px;
@@ -268,7 +264,6 @@
 
     .stat-label { color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
 
-    /* ─── SECTIONS ─── */
     section { padding: 6rem 3rem; }
 
     .section-label {
@@ -289,12 +284,84 @@
       background: var(--border);
     }
 
+    /* ─── GLITCH TITLE ─── */
     .section-title {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: clamp(2rem, 4vw, 3.5rem);
       letter-spacing: -0.02em;
       margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      cursor: default;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: inherit;
+      letter-spacing: inherit;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .section-title::before {
+      color: var(--accent2);
+      clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    }
+
+    .section-title::after {
+      color: var(--accent);
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    }
+
+    /* Active glitch state */
+    .section-title.glitching::before {
+      opacity: 1;
+      animation: glitch-layer-1 0.4s steps(2) forwards;
+    }
+
+    .section-title.glitching::after {
+      opacity: 1;
+      animation: glitch-layer-2 0.4s steps(2) forwards;
+    }
+
+    .section-title.glitching {
+      animation: glitch-main 0.4s steps(2) forwards;
+    }
+
+    @keyframes glitch-main {
+      0%   { transform: translate(0); filter: none; }
+      15%  { transform: translate(-4px, 2px); filter: hue-rotate(40deg) contrast(1.3); }
+      30%  { transform: translate(4px, -2px); filter: hue-rotate(-40deg) saturate(2); }
+      45%  { transform: translate(-2px, 1px); filter: contrast(1.5) brightness(1.1); }
+      60%  { transform: translate(3px, -1px); filter: hue-rotate(20deg); }
+      75%  { transform: translate(-1px, 0); filter: saturate(1.4); }
+      90%  { transform: translate(1px, 1px); filter: hue-rotate(-10deg); }
+      100% { transform: translate(0); filter: none; }
+    }
+
+    @keyframes glitch-layer-1 {
+      0%   { transform: translate(-6px, 0); clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); }
+      25%  { transform: translate(6px, 0);  clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%); }
+      50%  { transform: translate(-3px, 0); clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%); }
+      75%  { transform: translate(4px, 0);  clip-path: polygon(0 70%, 100% 70%, 100% 85%, 0 85%); }
+      100% { transform: translate(0);       clip-path: polygon(0 0, 0 0, 0 0, 0 0); opacity: 0; }
+    }
+
+    @keyframes glitch-layer-2 {
+      0%   { transform: translate(5px, 0);  clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%); }
+      25%  { transform: translate(-5px, 0); clip-path: polygon(0 10%, 100% 10%, 100% 25%, 0 25%); }
+      50%  { transform: translate(2px, 0);  clip-path: polygon(0 40%, 100% 40%, 100% 55%, 0 55%); }
+      75%  { transform: translate(-3px, 0); clip-path: polygon(0 80%, 100% 80%, 100% 95%, 0 95%); }
+      100% { transform: translate(0);       clip-path: polygon(0 0, 0 0, 0 0, 0 0); opacity: 0; }
     }
 
     /* ─── EXPERIENCE ─── */
@@ -435,7 +502,6 @@
       margin-bottom: 0.8rem;
     }
 
-    /* ─── SKILLS ─── */
     #skills { background: var(--bg); }
 
     .skills-container {
@@ -484,7 +550,6 @@
 
     .tag.teal:hover { background: rgba(66,245,200,0.15); }
 
-    /* ─── PROJECTS ─── */
     #projects { background: var(--surface); }
 
     .projects-grid {
@@ -552,7 +617,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* ─── EDUCATION ─── */
     #education { background: var(--bg); }
 
     .edu-card {
@@ -596,7 +660,6 @@
 
     .edu-location { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
 
-    /* ─── CONTACT ─── */
     #contact { background: var(--surface); }
 
     .contact-inner { max-width: 920px; }
@@ -666,7 +729,6 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); }
 
-    /* GLITCH SECTION TRANSITION */
     .glitch-section { position: relative; animation: sectionGlitch 0.55s ease; }
 
     .glitch-section::before,
@@ -740,9 +802,7 @@
     </ul>
   </nav>
 
-  <!-- ─── HERO ─── -->
   <section id="hero">
-    <!-- Animated canvas background -->
     <canvas id="hero-canvas"></canvas>
 
     <div class="hero-left">
@@ -779,10 +839,9 @@
     </div>
   </section>
 
-  <!-- ─── EXPERIENCE ─── -->
   <section id="experience">
     <div class="section-label">02 — Work History</div>
-    <h2 class="section-title">Experience</h2>
+    <h2 class="section-title" data-text="Experience">Experience</h2>
     <div class="exp-grid">
 
       <div class="exp-item reveal">
@@ -871,10 +930,9 @@
     </div>
   </section>
 
-  <!-- ─── SKILLS ─── -->
   <section id="skills">
     <div class="section-label">03 — Competencies</div>
-    <h2 class="section-title">Skills</h2>
+    <h2 class="section-title" data-text="Skills">Skills</h2>
     <div class="skills-container">
       <div class="skills-group reveal">
         <div class="skills-group-title">Sales &amp; Business</div>
@@ -908,10 +966,9 @@
     </div>
   </section>
 
-  <!-- ─── PROJECTS ─── -->
   <section id="projects">
     <div class="section-label">04 — Featured Work</div>
-    <h2 class="section-title">Projects</h2>
+    <h2 class="section-title" data-text="Projects">Projects</h2>
     <div class="projects-grid">
 
       <div class="project-card reveal">
@@ -958,10 +1015,9 @@
     </div>
   </section>
 
-  <!-- ─── EDUCATION ─── -->
   <section id="education">
     <div class="section-label">05 — Academic Background</div>
-    <h2 class="section-title">Education</h2>
+    <h2 class="section-title" data-text="Education">Education</h2>
     <div class="edu-card reveal">
       <div>
         <div class="edu-institution">Macquarie University</div>
@@ -977,10 +1033,9 @@
     </div>
   </section>
 
-  <!-- ─── CONTACT ─── -->
   <section id="contact">
     <div class="section-label">06 — Get in Touch</div>
-    <h2 class="section-title">Contact</h2>
+    <h2 class="section-title" data-text="Contact">Contact</h2>
     <div class="contact-inner">
       <p style="color: var(--muted); font-size: 13px; max-width: 480px; line-height: 1.8;">
         Open to opportunities in tech sales, cybersecurity, and business analytics. Feel free to reach out.
@@ -996,7 +1051,7 @@
         </a>
         <a class="contact-item linkedin" href="https://www.linkedin.com/in/samrat-chakraborty-166292239/" target="_blank" rel="noopener noreferrer">
           <div class="contact-item-label">LinkedIn</div>
-          <div class="contact-item-value">Profile ↗</div>
+          <div class="contact-item-value"> Profile ↗</div>
         </a>
         <div class="contact-item">
           <div class="contact-item-label">Location</div>
@@ -1012,9 +1067,7 @@
   </footer>
 
   <script>
-    // ─────────────────────────────────────────
-    //  HERO ANIMATED BACKGROUND
-    // ─────────────────────────────────────────
+    // HERO ANIMATED BACKGROUND
     (function() {
       const canvas = document.getElementById('hero-canvas');
       const ctx = canvas.getContext('2d');
@@ -1083,23 +1136,17 @@
 
       function draw() {
         ctx.clearRect(0, 0, W, H);
-
-        // Ambient glows
         const g1 = ctx.createRadialGradient(W * 0.75, H * 0.25, 0, W * 0.75, H * 0.25, W * 0.55);
         g1.addColorStop(0, 'rgba(66,245,200,0.055)');
         g1.addColorStop(1, 'rgba(10,10,15,0)');
         ctx.fillStyle = g1;
         ctx.fillRect(0, 0, W, H);
-
         const g2 = ctx.createRadialGradient(W * 0.15, H * 0.8, 0, W * 0.15, H * 0.8, W * 0.5);
         g2.addColorStop(0, 'rgba(232,245,66,0.04)');
         g2.addColorStop(1, 'rgba(10,10,15,0)');
         ctx.fillStyle = g2;
         ctx.fillRect(0, 0, W, H);
-
         drawHexGrid();
-
-        // Connections
         for (let i = 0; i < nodes.length; i++) {
           for (let j = i + 1; j < nodes.length; j++) {
             const dx = nodes[i].x - nodes[j].x;
@@ -1123,8 +1170,6 @@
             }
           }
         }
-
-        // Nodes
         nodes.forEach(n => {
           n.pulse += 0.025;
           const pScale = 1 + Math.sin(n.pulse) * 0.28;
@@ -1132,7 +1177,6 @@
           const mdy = mouse.y - n.y;
           const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
           const mg = Math.max(0, 1 - mdist / 110);
-
           const col = n.color === ACCENT ? '232,245,66' : '66,245,200';
           const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, (n.r * 4 + mg * 9) * pScale);
           glow.addColorStop(0, `rgba(${col},${0.28 + mg * 0.5})`);
@@ -1141,21 +1185,17 @@
           ctx.beginPath();
           ctx.arc(n.x, n.y, (n.r * 5 + mg * 10) * pScale, 0, Math.PI * 2);
           ctx.fill();
-
           ctx.fillStyle = n.color;
           ctx.globalAlpha = 0.88 + mg * 0.12;
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.r * pScale, 0, Math.PI * 2);
           ctx.fill();
           ctx.globalAlpha = 1;
-
           n.x += n.vx;
           n.y += n.vy;
           if (n.x < 0 || n.x > W) n.vx *= -1;
           if (n.y < 0 || n.y > H) n.vy *= -1;
         });
-
-        // Scan line
         ctx.strokeStyle = 'rgba(66,245,200,0.035)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
@@ -1164,14 +1204,11 @@
         ctx.stroke();
         scanY += scanDir * 0.5;
         if (scanY > H || scanY < 0) scanDir *= -1;
-
-        // Random glitch trigger
         if (glitchCooldown <= 0 && Math.random() < 0.004) {
           triggerGlitch();
           glitchCooldown = 150;
         }
         glitchCooldown--;
-
         glitchLines = glitchLines.filter(g => g.life > 0);
         glitchLines.forEach(g => {
           ctx.fillStyle = g.color;
@@ -1180,8 +1217,6 @@
           ctx.globalAlpha = 1;
           g.life--;
         });
-
-        // Corner brackets HUD
         const bS = 18, bP = 18;
         ctx.strokeStyle = 'rgba(232,245,66,0.18)';
         ctx.lineWidth = 1.5;
@@ -1192,28 +1227,22 @@
           ctx.lineTo(x + sx * bS, y);
           ctx.stroke();
         });
-
         requestAnimationFrame(draw);
       }
 
-      // Mouse tracking relative to hero section
       heroSection.addEventListener('mousemove', e => {
         const rect = heroSection.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
       });
       heroSection.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
       window.addEventListener('resize', () => { resize(); initNodes(); });
       resize();
       initNodes();
       draw();
     })();
 
-
-    // ─────────────────────────────────────────
-    //  SCROLL REVEAL
-    // ─────────────────────────────────────────
+    // SCROLL REVEAL
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -1225,16 +1254,13 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Footer year
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Flip buttons
     function toggleFlip(btn) {
       btn.classList.toggle('flipped');
       btn.closest('.exp-item').querySelector('.exp-detail').classList.toggle('open');
     }
 
-    // Glitch section on nav click
     function triggerSectionGlitch(section) {
       section.classList.remove('glitch-section');
       void section.offsetWidth;
@@ -1254,7 +1280,6 @@
       });
     });
 
-    // Active nav highlight
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
@@ -1264,6 +1289,34 @@
         a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
       });
     });
+
+    // ─── SECTION TITLE GLITCH — random auto-trigger ───
+    (function() {
+      const titles = document.querySelectorAll('.section-title');
+
+      function fireGlitch(el) {
+        if (el.classList.contains('glitching')) return;
+        el.classList.add('glitching');
+        setTimeout(() => el.classList.remove('glitching'), 420);
+      }
+
+      function scheduleNext(el) {
+        // Random interval: 1–11 seconds between glitches per title
+        const delay = 1000 + Math.random() * 2000;
+        setTimeout(() => {
+          // Only glitch if the title is somewhere near the viewport
+          const rect = el.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight + 200 && rect.bottom > -200;
+          if (inView) fireGlitch(el);
+          scheduleNext(el);
+        }, delay);
+      }
+
+      titles.forEach((el, i) => {
+        // Stagger initial delays so they don't all fire together
+        setTimeout(() => scheduleNext(el), i * 1800 + Math.random() * 3000);
+      });
+    })();
   </script>
 </body>
 </html>
