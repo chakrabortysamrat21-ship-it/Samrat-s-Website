@@ -787,9 +787,163 @@
       .contact-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
+
+    #sc-loader {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+#sc-loader.exit { transform: translateY(-100%); pointer-events: none; }
+
+.lc-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 6rem;
+  letter-spacing: -0.04em;
+  color: #f0ede8;
+  line-height: 1;
+  opacity: 0;
+}
+.lc-logo span { color: #e8f542; }
+.lc-logo.show { animation: lcStamp 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+@keyframes lcStamp {
+  0%   { opacity:0; transform: scale(1.18) skewX(-4deg); filter: blur(6px); }
+  60%  { opacity:1; transform: scale(0.97) skewX(1deg); filter: blur(0); }
+  80%  { transform: scale(1.01) skewX(-0.5deg); }
+  100% { opacity:1; transform: scale(1) skewX(0); }
+}
+
+.lc-glitch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.lc-glitch::before,
+.lc-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 6rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  opacity: 0;
+}
+.lc-glitch::before { color: #42f5c8; }
+.lc-glitch::after  { color: #e8f542; }
+.lc-glitch.glitch::before { animation: lcGA 0.35s steps(2) forwards; opacity: 1; }
+.lc-glitch.glitch::after  { animation: lcGB 0.35s steps(2) forwards; opacity: 1; }
+
+@keyframes lcGA {
+  0%   { transform:translate(-5px,0); clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%); }
+  50%  { transform:translate(5px,0);  clip-path:polygon(0 55%,100% 55%,100% 75%,0 75%); }
+  100% { opacity:0; transform:translate(0); clip-path:polygon(0 0,0 0,0 0,0 0); }
+}
+@keyframes lcGB {
+  0%   { transform:translate(6px,0);  clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%); }
+  50%  { transform:translate(-4px,0); clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%); }
+  100% { opacity:0; transform:translate(0); clip-path:polygon(0 0,0 0,0 0,0 0); }
+}
+
+.lc-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7a7a8a;
+  margin-top: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.lc-sub.show { opacity: 1; }
+
+.lc-bar-wrap {
+  width: 200px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  margin-top: 2.5rem;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: relative;
+}
+.lc-bar-wrap.show { opacity: 1; }
+.lc-bar {
+  height: 100%;
+  width: 0%;
+  background: #e8f542;
+  transition: width 0.05s linear;
+  position: relative;
+}
+.lc-bar::after {
+  content: '';
+  position: absolute;
+  right: 0; top: -1px;
+  width: 6px; height: 4px;
+  background: #e8f542;
+  filter: blur(2px);
+  opacity: 0.9;
+}
+.lc-scan {
+  position: absolute;
+  top: 0; left: -40px;
+  width: 40px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(66,245,200,0.5), transparent);
+  animation: lcScan 1.2s linear infinite;
+}
+@keyframes lcScan { from { left: -40px; } to { left: 100%; } }
+
+.lc-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #42f5c8;
+  letter-spacing: 0.1em;
+  margin-top: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  min-width: 40px;
+  text-align: center;
+}
+.lc-pct.show { opacity: 1; }
+
+.lc-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: rgba(232,245,66,0.3);
+  border-style: solid;
+}
+.lc-corner.tl { top:24px; left:24px; border-width: 1.5px 0 0 1.5px; }
+.lc-corner.tr { top:24px; right:24px; border-width: 1.5px 1.5px 0 0; }
+.lc-corner.bl { bottom:24px; left:24px; border-width: 0 0 1.5px 1.5px; }
+.lc-corner.br { bottom:24px; right:24px; border-width: 0 1.5px 1.5px 0; }
   </style>
 </head>
 <body>
+
+  <div id="sc-loader">
+  <div class="lc-corner tl"></div>
+  <div class="lc-corner tr"></div>
+  <div class="lc-corner bl"></div>
+  <div class="lc-corner br"></div>
+  <div style="position:relative;">
+    <div class="lc-logo" id="lc-logo">SC<span>.</span></div>
+    <div class="lc-glitch" id="lc-glitch" data-text="SC."></div>
+  </div>
+  <div class="lc-sub" id="lc-sub">initialising portfolio</div>
+  <div class="lc-bar-wrap" id="lc-bar-wrap">
+    <div class="lc-bar" id="lc-bar"></div>
+    <div class="lc-scan"></div>
+  </div>
+  <div class="lc-pct" id="lc-pct">0%</div>
+</div>
 
   <nav>
     <a class="nav-logo" href="#hero">SC<span>.</span></a>
@@ -1348,6 +1502,55 @@
         setTimeout(() => scheduleNext(el), i * 1800 + Math.random() * 3000);
       });
     })();
+
+    (function() {
+  const overlay  = document.getElementById('sc-loader');
+  const logo     = document.getElementById('lc-logo');
+  const glitch   = document.getElementById('lc-glitch');
+  const sub      = document.getElementById('lc-sub');
+  const barWrap  = document.getElementById('lc-bar-wrap');
+  const bar      = document.getElementById('lc-bar');
+  const pct      = document.getElementById('lc-pct');
+
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => logo.classList.add('show'), 200);
+
+  let g = 0;
+  function doGlitch() {
+    if (g >= 3) { sub.classList.add('show'); startBar(); return; }
+    setTimeout(() => {
+      glitch.classList.remove('glitch');
+      void glitch.offsetWidth;
+      glitch.classList.add('glitch');
+      g++;
+      setTimeout(doGlitch, 320 + Math.random() * 180);
+    }, g === 0 ? 600 : 200);
+  }
+  doGlitch();
+
+  function startBar() {
+    barWrap.classList.add('show');
+    pct.classList.add('show');
+    let progress = 0;
+    const speeds = [0.8,1.2,0.5,1.5,0.9,1.1,0.6,1.4,1.0,0.7];
+    let si = 0;
+    const interval = setInterval(() => {
+      const inc = speeds[si % speeds.length] * (progress < 70 ? 1.4 : progress < 90 ? 0.8 : 0.4);
+      progress = Math.min(100, progress + inc);
+      bar.style.width = progress + '%';
+      pct.textContent = Math.round(progress) + '%';
+      si++;
+      if (progress >= 100) { clearInterval(interval); setTimeout(exitLoader, 350); }
+    }, 40);
+  }
+
+  function exitLoader() {
+    document.body.style.overflow = '';
+    overlay.classList.add('exit');
+    setTimeout(() => overlay.remove(), 1100);
+  }
+})();
   </script>
 </body>
 </html>
