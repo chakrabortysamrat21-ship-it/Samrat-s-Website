@@ -928,6 +928,8 @@
 </head>
 <body>
 
+  
+
   <div id="sc-loader">
   <div class="lc-corner tl"></div>
   <div class="lc-corner tr"></div>
@@ -1502,7 +1504,91 @@
         setTimeout(() => scheduleNext(el), i * 1800 + Math.random() * 3000);
       });
     })();
+// ─── CYBER DECRYPTION TEXT EFFECT ───
+(function () {
 
+  const letters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>/{}[]";
+
+  function decryptElement(el) {
+
+    // Skip elements with child HTML
+    if (el.children.length > 0) {
+
+      const childNodes = el.querySelectorAll("*");
+
+      childNodes.forEach(child => {
+        const finalText = child.textContent;
+
+        decryptText(child, finalText);
+      });
+
+      return;
+    }
+
+    decryptText(el, el.textContent);
+  }
+
+  function decryptText(element, finalText) {
+
+    let iteration = 0;
+
+    const interval = setInterval(() => {
+
+      element.textContent = finalText
+        .split("")
+        .map((char, index) => {
+
+          if (char === " ") return " ";
+
+          if (index < iteration) {
+            return finalText[index];
+          }
+
+          return letters[
+            Math.floor(Math.random() * letters.length)
+          ];
+
+        })
+        .join("");
+
+      if (iteration >= finalText.length) {
+        clearInterval(interval);
+        element.textContent = finalText;
+      }
+
+      iteration += 0.5;
+
+    }, 35);
+  }
+
+  const decryptTargets = document.querySelectorAll(
+    ".section-title, .hero-name, .hero-subtitle, .stat-number"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (
+        entry.isIntersecting &&
+        !entry.target.dataset.decrypted
+      ) {
+
+        entry.target.dataset.decrypted = "true";
+
+        decryptElement(entry.target);
+      }
+
+    });
+
+  }, {
+    threshold: 0.45
+  });
+
+  decryptTargets.forEach(el => observer.observe(el));
+
+})();
     (function() {
   const overlay  = document.getElementById('sc-loader');
   const logo     = document.getElementById('lc-logo');
@@ -1551,6 +1637,9 @@
     setTimeout(() => overlay.remove(), 1100);
   }
 })();
+
+
   </script>
+  
 </body>
 </html>
